@@ -1,0 +1,141 @@
+#include <iostream>
+
+using namespace std;
+
+
+struct item
+{
+	int value;
+	item *next{ NULL }, * prev{ NULL };
+};
+
+bool emptystack(item* stackhead)
+{
+	return (stackhead == NULL);
+}
+
+void stackpush(item* &stackhead, int value)
+{
+	item *newitem = new item;
+	newitem->value = value;
+	newitem->next = stackhead;
+	stackhead = newitem;
+}
+
+int stackpop(item* &stackhead)
+{
+	if (stackhead != NULL)
+	{
+		int temp = stackhead->value;
+		item *delitem = stackhead;
+		stackhead = stackhead->next;
+		delete delitem;
+		return temp;
+	}
+	return -1;
+}
+
+void stackprint(item *stackhead)
+{
+	if (stackhead != NULL)
+	{
+		item* currentitem = stackhead;
+		cout << "---------\n";
+		do
+		{
+			cout << currentitem->value << "\n";
+			currentitem = currentitem->next;
+		} while (currentitem != NULL);
+		cout << "---------\n";
+	}
+	else
+		cout << "stack is empty";
+}
+
+void listpush(item* &listfirst, int value)
+{
+	item* listlast = listfirst;
+	if(listlast != NULL)
+		while (listlast->prev != NULL)
+			listlast = listlast->prev;
+
+	item* newitem = new item;
+	newitem->value = value;
+	if (listfirst != NULL)
+		listlast->prev = newitem;
+	else 
+		listfirst = newitem; // самый первый элемент в списке
+}
+
+int listpop(item* &listfirst)
+{
+	if (listfirst != NULL)
+	{
+		int temp = listfirst->value;
+		item* delitem;
+		delitem = listfirst;
+		listfirst = listfirst->prev;
+		delete delitem;
+		return temp;
+	}
+	return -1;
+}
+
+void listprint(item* listfirst)
+{
+	if (listfirst != NULL)
+	{
+		item* currentitem = listfirst;
+		cout << "---------\n";
+		do
+		{
+			cout << currentitem->value << "\n";
+			currentitem = currentitem->prev;
+		} while (currentitem != NULL);
+		cout << "---------\n";
+	}
+}
+
+int main()
+{
+
+	
+	item *list{ NULL };
+	item *stack{ NULL };
+	item *newstack{ NULL };
+	
+	stackpush(stack, 100);
+
+	
+	stackpush(stack, 200);
+	stackpush(stack, 300);
+	stackpush(stack, 400);
+
+	stackprint(stack);
+	cout << "stack pop = " << *stackpop(stack) << endl;
+	stackprint(stack);
+	cout << "stack pop = " << stackpop(stack) << endl;
+	cout << "stack pop = " << stackpop(stack) << endl;
+	cout << "stack pop = " << stackpop(stack) << endl;
+	cout << "stack pop = " << stackpop(stack) << endl;
+	stackprint(stack);
+	
+
+	listpush(list, 100);
+	listpush(list, 200);
+	listpush(list, 300);
+	listpush(list, 400);
+	listprint(list);
+	listpush(list, 500);
+	listprint(list);
+	cout << "list pop = " << listpop(list) << endl;
+	listprint(list);
+	cout << "list pop = " << listpop(list) << endl;
+	cout << "list pop = " << listpop(list) << endl;
+	cout << "list pop = " << listpop(list) << endl;
+	cout << "list pop = " << listpop(list) << endl;
+	cout << "list pop = " << listpop(list) << endl;
+	cout << "list pop = " << listpop(list) << endl;
+	listprint(list);
+	
+}
