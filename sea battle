@@ -1,0 +1,42 @@
+
+#include <iostream>
+#include <time.h>
+
+using namespace std;
+
+const int N{10};
+const int D1{4};
+const int D2{3};
+const int D3{2};
+const int D4{1};
+enum DECKS {
+    DECKS1 = 1
+    DECKS2
+    DECKS3
+    DECKS4
+}
+
+enum STATUS{
+    water,
+    desk,
+    zone
+};
+struct ship {
+    DECKS decks;
+    bool dead;
+};
+struct cell{
+    STATUS status{WATER};
+    bool shot{false};
+    ship* ship
+}
+
+int main()
+{
+    for(int count = 1; count <= 4; count++){
+        bool horizont
+            
+        
+    }
+    
+}
